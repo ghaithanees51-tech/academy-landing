@@ -189,6 +189,8 @@ export type MultimediaItem = {
 };
 
 /** Gallery page */
+export type GalleryCategory = string;
+
 export type GalleryItem = {
     id: number;
     src: string;

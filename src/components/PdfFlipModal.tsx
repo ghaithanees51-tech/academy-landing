@@ -256,7 +256,6 @@ const PdfFlipModal: FC<Props> = ({ url, title = "PDF", isOpen, onClose }) => {
     return () => window.removeEventListener("keydown", onEsc);
   }, [isOpen, onClose]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   const flipAPI = () => bookRef.current?.pageFlip();
 
   // flipNext: right page folds LEFT → natural Arabic "open the book" gesture
