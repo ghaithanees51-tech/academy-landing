@@ -1,0 +1,332 @@
+@font-face {
+  font-family: "Lusail-Light";
+  src: url("./assets/fonts/Lusail-Light.woff2") format("woff2"), url("./assets/fonts/Lusail-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lusail-Regular";
+  src: url("./assets/fonts/Lusail-Regular.woff2") format("woff2"), url("./assets/fonts/Lusail-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lusail-Medium";
+  src: url("./assets/fonts/Lusail-Medium.woff2") format("woff2"), url("./assets/fonts/Lusail-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lusail-Bold";
+  src: url("./assets/fonts/Lusail-Bold.woff2") format("woff2"), url("./assets/fonts/Lusail-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+
+@theme  {
+  /* Light theme – brand */
+  --color-primary: #0D4261;
+  --color-secondary: #A29475;
+  --color-secondary-dark: #C9A94F;
+  --color-accent: #8A1538;
+  --color-white: #ffffff;
+  --color-black: #343f52;
+  --color-body: #60697b;
+
+  /* Light theme semantic colors */
+  --color-background: #ffffff;
+  --color-surface: #f9fafb;        
+  --color-text: #1a1a1a;          
+  --color-text-muted: #6b7280;    
+  --color-border: #e5e7eb; 
+
+  --font-sans: "Lusail-Regular", ui-sans-serif, system-ui, sans-serif;
+  --font-bold: "Lusail-Bold", ui-sans-serif, system-ui, sans-serif;
+  --font-extrabold: "Lusail-Bold", ui-sans-serif, system-ui, sans-serif;
+  --font-medium: "Lusail-Medium", ui-sans-serif, system-ui, sans-serif;
+  --font-light: "Lusail-Light", ui-sans-serif, system-ui, sans-serif;
+
+  /* Custom shadows */
+  --shadow-brand: 0 4px 14px -2px rgb(0 0 0 / 0.12), 0 6px 20px -4px rgb(0 0 0 / 0.1);
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 0.06), 0 8px 24px -8px rgb(0 0 0 / 0.12);
+  --shadow-glow: 0 0 20px -4px oklch(0.55 0.14 250 / 0.4);
+  --shadow-soft: 0 0.25rem 1.75rem rgba(30, 34, 40, 0.07);
+
+  /* Main content shell — same inner width as header / hero (1400px) */
+  --max-width-layout: 87.5rem;
+
+	--text-sm: 13px;
+	--text-line-height-sm: 1.4;
+
+	--text-base: 15px;
+  	--text-line-height-base: 1.6;
+
+	--text-md: 16px;
+	--text-line-height-md: 1.8;
+
+	--text-lg: 18px;
+	--text-line-height-lg: 1.6;
+
+	--text-custom: 20px;
+	--text-line-height-lg: 1.8;
+
+	--text-xl: 24px;
+	--text-line-height-xl: 2.6;
+
+	--text-2xl: 32px;
+	--text-line-height-2xl: 2.8;
+
+	--text-3xl: 40px;
+	--text-line-height-3xl: 3;
+
+	--text-4xl: 48px;
+	--text-line-height-4xl: 3.2;
+
+	--text-5xl: 56px;
+	--text-line-height-5xl: 3.4;
+
+	--text-6xl: 64px;
+	--text-line-height-6xl: 3.6;
+}
+
+/* ── Skeleton shimmer ───────────────────────────────────── */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.18) 0%,
+    rgba(148, 163, 184, 0.32) 20%,
+    rgba(148, 163, 184, 0.18) 40%,
+    rgba(148, 163, 184, 0.18) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.2s ease-in-out infinite;
+}
+
+/* ── Ken Burns zoom animations ── */
+@keyframes kb-zoom-in {
+  0%   { transform: scale(1);    }
+  100% { transform: scale(1.12); }
+}
+@keyframes kb-zoom-out {
+  0%   { transform: scale(1.12); }
+  100% { transform: scale(1);    }
+}
+
+.hero-bg-zoom-in {
+  animation: kb-zoom-in 6s ease-in-out forwards;
+}
+.hero-bg-zoom-out {
+  animation: kb-zoom-out 6s ease-in-out forwards;
+}
+
+/*
+ * Touch/iPad ken-burns: runs entirely on the GPU compositor thread.
+ * CSS @keyframes do NOT invalidate backdrop-filter captures above them,
+ * which is the reason GSAP-driven scale causes "shivering" on Safari/iPad.
+ */
+@keyframes kb-zoom-touch {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1);    }
+}
+.hero-bg-zoom-touch {
+  will-change: transform;
+  animation: kb-zoom-touch 4.5s ease-out forwards;
+}
+
+/* Floating share sheet */
+@keyframes shareSheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Hero text entrance animations ── */
+@keyframes hero-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-text-animate {
+  animation: hero-text-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-text-animate.hero-text-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.hero-text-animate.hero-text-delay-2 { animation-delay: 0.25s; opacity: 0; }
+.hero-text-animate.hero-text-delay-3 { animation-delay: 0.4s; opacity: 0; }
+
+/* ── Float animation ── */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+.animate-float {
+  animation: float-y 4s ease-in-out infinite;
+}
+
+/* ── Scroll-reveal animations ── */
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(2rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-slide-left {
+  from { opacity: 0; transform: translateX(2.5rem); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fade-slide-right {
+  from { opacity: 0; transform: translateX(-2.5rem); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.reveal-up    { opacity: 0; }
+.reveal-left  { opacity: 0; }
+.reveal-right { opacity: 0; }
+
+.reveal-up.is-visible    { animation: fade-slide-up    0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.reveal-left.is-visible  { animation: fade-slide-left  0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.reveal-right.is-visible { animation: fade-slide-right 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+.reveal-delay-1 { animation-delay: 0.1s; }
+.reveal-delay-2 { animation-delay: 0.22s; }
+.reveal-delay-3 { animation-delay: 0.36s; }
+
+/* Tab content fade */
+@keyframes tab-fade-in {
+  from { opacity: 0; transform: translateY(0.5rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tab-animate { animation: tab-fade-in 0.35s ease both; }
+
+/* (removed) WCM HTML card styles + BlogDetail image styles */
+
+/* Map font-display-* helpers to each Lusail weight variant */
+@layer utilities {
+  .font-display-light {
+    font-family: "Lusail-Light", ui-sans-serif, system-ui, sans-serif;
+    font-style: normal;
+  }
+  .font-display-regular {
+    font-family: "Lusail-Regular", ui-sans-serif, system-ui, sans-serif;
+    font-style: normal;
+  }
+  .font-display-medium {
+    font-family: "Lusail-Medium", ui-sans-serif, system-ui, sans-serif;
+    font-style: normal;
+  }
+  .font-display-bold {
+    font-family: "Lusail-Bold", ui-sans-serif, system-ui, sans-serif;
+    font-style: normal;
+  }
+}
+
+@layer base {
+  /* html {
+    font-size: 14px;
+  } */
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-text antialiased font-sans;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-bold;
+  }
+}
+
+/* ── Blog body inline image zoom ──────────────────────────────────────────── */
+.blog-body-img-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.blog-body-img-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.blog-body-img-zoom {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  opacity: 1;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.shine {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: none;
+}
+
+.group:hover .shine {
+  animation: shineMove 1.2s ease forwards;
+}
+
+@keyframes shineMove {
+  0% {
+    left: -120%;
+  }
+  100% {
+    left: 140%;
+  }
+}
+

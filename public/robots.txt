@@ -1,0 +1,4 @@
+# Dev / fallback — production `vite build` overwrites `dist/robots.txt` with `Sitemap:` when `VITE_SITE_URL` is set.
+
+User-agent: *
+Allow: /
