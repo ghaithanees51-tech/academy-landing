@@ -10,6 +10,7 @@ import PdfFlipModal from "@/components/PdfFlipModal";
 import { useLocale } from "@/hooks/useLocale";
 import { publicationsUiText } from "@/data/publicationsData";
 import { fetchPublications } from "@/services/publicationsApi";
+import { API_BASE_URL } from "@/config/api";
 import type { PublicationDoc } from "@/types/page.d.ts";
 
 const DEFAULT_CHAT_MESSAGE: ChatMessage = {
@@ -47,7 +48,7 @@ export default function PublicationView() {
     async (signal?: AbortSignal) => {
       if (!id) return [];
 
-      const response = await fetch(`/api/publications/${id}/chat-history/`, {
+      const response = await fetch(`${API_BASE_URL}/api/publications/${id}/chat-history/`, {
         headers: { Accept: "application/json" },
         signal,
       });
@@ -166,7 +167,7 @@ export default function PublicationView() {
 
     const controller = new AbortController();
 
-    fetch(`/api/publications/${doc.id}/summary/`, {
+    fetch(`${API_BASE_URL}/api/publications/${doc.id}/summary/`, {
       headers: { Accept: "application/json" },
       signal: controller.signal,
     })
@@ -241,7 +242,7 @@ export default function PublicationView() {
     setIsAsking(true);
 
     try {
-      const response = await fetch(`/api/publications/${doc.id}/ask/`, {
+      const response = await fetch(`${API_BASE_URL}/api/publications/${doc.id}/ask/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
